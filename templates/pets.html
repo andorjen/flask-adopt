@@ -4,6 +4,9 @@
 
 {% block content %}
 <h1> Pets </h1>
+{% for msg in get_flashed_messages() %}
+<p>{{ msg }}</p>
+{% endfor %}
 <div class="row">
     {% for pet in pets%}
 
