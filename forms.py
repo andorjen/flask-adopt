@@ -13,3 +13,9 @@ class AddPetForm(FlaskForm):
         choices=[('baby', 'Baby'), ('young', 'Young'), ('adult', 'Adult'), ('senior', 'Senior')], 
         validators=[InputRequired()])
     notes = StringField("Notes", validators=[Optional()])
+
+class EditPetForm(FlaskForm):
+    """Form for editing a pet"""
+    photo_url = StringField("Photo URL", validators=[Optional(), URL()])
+    notes = StringField("Notes", validators=[Optional()])
+    available = BooleanField("Available")
