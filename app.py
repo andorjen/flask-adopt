@@ -1,12 +1,12 @@
 """Flask app for adopt app."""
 
 from flask import Flask, redirect, render_template, request, flash
-
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, Pet
-
 from forms import AddPetForm, EditPetForm
+
+DEFAULT_IMG_URL="https://i.pinimg.com/originals/4b/d7/c0/4bd7c02c36f2945deeb024254fcce362.jpg"
 
 app = Flask(__name__)
 
@@ -36,7 +36,7 @@ def add_pet():
     if form.validate_on_submit():
         name = form.name.data
         species = form.species.data
-        photo_url = form.photo_url.data 
+        photo_url = form.photo_url.data or None
         age = form.age.data
         notes = form.notes.data
 
@@ -59,7 +59,7 @@ def show_pet_info(pet_id):
     form = EditPetForm(obj=pet)
 
     if form.validate_on_submit():
-        pet.photo_url = form.photo_url.data 
+        pet.photo_url = form.photo_url.data or DEFAULT_IMG_URL  
         pet.notes = form.notes.data
         pet.available = form.available.data
 
